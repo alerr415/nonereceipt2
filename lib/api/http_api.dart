@@ -8,3 +8,13 @@ class HttpClient {
     return "";
   }
 }
+
+Future<bool> testRequest() async {
+  var url = Uri.parse("${HttpClient.getUrl()}/path/to/request");
+  var result = await http.get(url);
+  if (result.statusCode == 200) {
+    return true;
+  } else {
+    return false;
+  }
+}
