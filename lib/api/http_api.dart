@@ -9,7 +9,7 @@ class HttpClient {
   }
 
   static Future<String> testRequest() async {
-    var url = Uri.parse("192.168.1.11:8000/");
+    var url = Uri.parse("http://192.168.1.11:8000/");
     var result = await http.get(url);
     if (result.statusCode == 200) {
       return result.body;
