@@ -4,7 +4,7 @@ class TestController {
 
   TestController() {
   }
-  static Future<bool> getTestGetRequest() async {
+  static Future<String> getTestGetRequest() async {
     return await HttpClient.testRequest();
   }
 }

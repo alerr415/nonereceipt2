@@ -8,15 +8,14 @@ class HttpClient {
     return "";
   }
 
-  static Future<bool> testRequest() async {
-    var url = Uri.parse("ip_cimed_ide:8000/");
+  static Future<String> testRequest() async {
+    var url = Uri.parse("192.168.1.11:8000/");
     var result = await http.get(url);
     if (result.statusCode == 200) {
-      print(result.body);
-      return true;
+      return result.body;
     } else {
       print("Something went wrong: ${result.statusCode}");
-      return false;
+      return "error occured..";
     }
   }
 }

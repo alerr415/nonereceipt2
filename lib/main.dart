@@ -21,7 +21,7 @@ class MyAppState extends State<MyApp> {
         appBar: AppBar(title: const Text('NoneReceipt')),
         body: FutureBuilder(
           future: TestController.getTestGetRequest(),
-          builder: (BuildContext context, AsyncSnapshot<bool> snapshot) {
+          builder: (BuildContext context, AsyncSnapshot<String> snapshot) {
             if (snapshot.hasData) {
               return Text(snapshot.data.toString());
             } else if (snapshot.hasError) {
