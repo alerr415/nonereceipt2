@@ -7,14 +7,16 @@ class HttpClient {
   static String getUrl() {
     return "";
   }
-}
 
-Future<bool> testRequest() async {
-  var url = Uri.parse("${HttpClient.getUrl()}/path/to/request");
-  var result = await http.get(url);
-  if (result.statusCode == 200) {
-    return true;
-  } else {
-    return false;
+  static Future<bool> testRequest() async {
+    var url = Uri.parse("ip_cimed_ide:8000/");
+    var result = await http.get(url);
+    if (result.statusCode == 200) {
+      print(result.body);
+      return true;
+    } else {
+      print("Something went wrong: ${result.statusCode}");
+      return false;
+    }
   }
 }

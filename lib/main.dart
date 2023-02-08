@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'controller/test_controller.dart';
 
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
@@ -18,7 +19,17 @@ class MyAppState extends State<MyApp> {
     return MaterialApp(
       home: Scaffold(
         appBar: AppBar(title: const Text('NoneReceipt')),
-        body: const SafeArea(child: Text("landing")),
+        body: FutureBuilder(
+          future: TestController.getTestGetRequest(),
+          builder: (BuildContext context, AsyncSnapshot<bool> snapshot) {
+            if (snapshot.hasData) {
+              return Text(snapshot.data.toString());
+            } else if (snapshot.hasError) {
+              return Text("Error: ${snapshot.error}");
+            }
+            return const CircularProgressIndicator();
+          },
+        ),
       ),
     );
   }
