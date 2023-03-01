@@ -1,0 +1,4 @@
+#Wed Feb 01 22:39:10 EET 2023
+base.0=/Users/alerr415/Development/FlutterProjects/flutter_projects/nonereceipt2/build/app/intermediates/dex/debug/mergeDexDebug/classes.dex
+renamed.0=classes.dex
+path.0=classes.dex
