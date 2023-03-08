@@ -34,7 +34,7 @@ const data = Buffer.from(ndefByteArray);
 
 
 // write to binary file
-fs.writeFile('ndef.bin', data, (err) => {
+fs.writeFile('raspi/ndef.bin', data, (err) => {
   if (err) throw err;
   console.log('Bytes written to file!');
 });
