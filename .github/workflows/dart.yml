@@ -17,6 +17,9 @@ jobs:
 
     steps:
       - uses: actions/checkout@v3
+      - run: wget https://dl.google.com/android/repository/android-ndk-r24-linux.zip
+      - run: unzip android-ndk-r24-linux.zip
+      - uses: subosito/flutter-action@v2
 
       # Note: This workflow uses the latest stable version of the Dart SDK.
       # You can specify other versions if desired, see documentation here:
@@ -26,7 +29,7 @@ jobs:
 
       - name: Install dependencies
         working-directory: ./flutter
-        run: dart pub get
+        run: flutter pub get
 
       # Uncomment this step to verify the use of 'dart format' on each commit.
       - name: Verify formatting
