@@ -192,7 +192,7 @@ class _ReceiptListScreenState extends State<ReceiptListScreen> {
   @override
   void initState() {
     super.initState();
-    _futureReceipts = HttpClient.fetchReceiptsByRetailer(widget.retailer.id);
+    _futureReceipts = HttpClient.fetchReceiptsByRetailer(widget.retailer.name);
   }
 
   @override
@@ -271,7 +271,7 @@ class _RetailerDetailsScreenState extends State<RetailerDetailsScreen> {
   @override
   void initState() {
     super.initState();
-    _futureReceipts = HttpClient.fetchReceiptsByRetailer(widget.retailer.id);
+    _futureReceipts = HttpClient.fetchReceiptsByRetailer(widget.retailer.name);
   }
 
   @override

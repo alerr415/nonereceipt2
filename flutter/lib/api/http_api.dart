@@ -35,14 +35,16 @@ class HttpClient {
     }
   }
 
-  static Future<List<Receipt>> fetchReceiptsByRetailer(int retailerId) async {
-    var url = Uri.parse("http://127.0.0.1:8000/retailers/$retailerId/receipts");
+  static Future<List<Receipt>> fetchReceiptsByRetailer(
+      String retailerName) async {
+    var url =
+        Uri.parse("http://127.0.0.1:8000/retailers/$retailerName/receipts");
     var result = await http.get(url);
     if (result.statusCode == 200) {
       var jsonList = json.decode(result.body) as List;
       return jsonList.map((json) => Receipt.fromJson(json)).toList();
     } else {
-      throw Exception("failed to fetch recipes from retailer: $retailerId");
+      throw Exception("failed to fetch recipes from retailer: $retailerName");
     }
   }
 }
