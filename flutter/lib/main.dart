@@ -96,7 +96,6 @@ import 'package:flutter/material.dart';
 import 'api/http_api.dart';
 import 'models/receipt.dart';
 import 'models/retailer.dart';
-import 'dart:convert';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
