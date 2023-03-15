@@ -19,8 +19,7 @@ class HttpClient {
       var jsonList = json.decode(result.body) as List;
       return jsonList.map((json) => Receipt.fromJson(json)).toList();
     } else {
-      print("Something went wrong: ${result.statusCode}");
-      return [];
+      throw Exception("Something went wrong: ${result.statusCode}");
     }
   }
 
@@ -32,8 +31,18 @@ class HttpClient {
       var jsonList = json.decode(result.body) as List;
       return jsonList.map((json) => Retailer.fromJson(json)).toList();
     } else {
-      print("Something went wrong: ${result.statusCode}");
-      return [];
+      throw Exception("Something went wrong: ${result.statusCode}");
+    }
+  }
+
+  static Future<List<Receipt>> fetchReceiptsByRetailer(int retailerId) async {
+    var url = Uri.parse("http://127.0.0.1:8000/retailers/$retailerId/receipts");
+    var result = await http.get(url);
+    if (result.statusCode == 200) {
+      var jsonList = json.decode(result.body) as List;
+      return jsonList.map((json) => Receipt.fromJson(json)).toList();
+    } else {
+      throw Exception("failed to fetch recipes from retailer: $retailerId");
     }
   }
 }
