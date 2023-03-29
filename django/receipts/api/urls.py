@@ -11,4 +11,6 @@ urlpatterns = [
     path('retailers/', views.getRetailers),
     path('retailers/<str:pk>/receipts/', views.getReceiptsByRetailer),
     path('receipts/<str:pk>/', views.getReceiptDetails),
+    path('receipt/<str:pk>/products/', views.getProductsByReceipt),
+    path('products/', views.getProducts),
 ]

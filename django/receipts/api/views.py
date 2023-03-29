@@ -1,6 +1,6 @@
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
-from .serializers import ReceiptSerializer, RetailerSerializer
+from .serializers import ReceiptSerializer, RetailerSerializer, ProductSerializer
 from .models import Receipt, Retailer
 
 # Test route
@@ -67,4 +67,20 @@ def getRetailers(request):
 def getReceiptsByRetailer(request, pk):
     receipts = Receipt.objects.filter(retailer=pk)
     serializer = ReceiptSerializer(receipts, many=True)
+    return Response(serializer.data)
+
+
+# Get products by receipt
+@api_view(['GET'])
+def getProductsByReceipt(request, pk):
+    receipt = Receipt.objects.filter(id=pk)
+    serializer = ProductSerializer(receipt, many=True)
+    return Response(serializer.data)
+
+
+# Get products
+@api_view(['GET'])
+def getProducts(request, pk):
+    products = Receipt.objects.all()
+    serializer = ProductSerializer(products)
     return Response(serializer.data)
