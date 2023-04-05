@@ -12,24 +12,12 @@ class HttpClient {
   }
 
   // Fetch receipts from the API
-  static Future<List<Receipt>> testRequest() async {
+  static Future<List<Receipt>> fetchReceipts() async {
     var url = Uri.parse("http://127.0.0.1:8000/receipts/");
     var result = await http.get(url);
     if (result.statusCode == 200) {
       var jsonList = json.decode(result.body) as List;
       return jsonList.map((json) => Receipt.fromJson(json)).toList();
-    } else {
-      throw Exception("Something went wrong: ${result.statusCode}");
-    }
-  }
-
-  // Fetch retailers from the API
-  static Future<List<Retailer>> fetchRetailers() async {
-    var url = Uri.parse("http://127.0.0.1:8000/retailers/");
-    var result = await http.get(url);
-    if (result.statusCode == 200) {
-      var jsonList = json.decode(result.body) as List;
-      return jsonList.map((json) => Retailer.fromJson(json)).toList();
     } else {
       throw Exception("Something went wrong: ${result.statusCode}");
     }

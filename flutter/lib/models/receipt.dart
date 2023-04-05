@@ -1,23 +1,27 @@
 class Receipt {
-  final String body;
+  final String retailer;
   final DateTime created;
+  final Map<String, dynamic> items;
 
   Receipt({
-    required this.body,
+    required this.retailer,
     required this.created,
+    required this.items,
   });
 
   factory Receipt.fromJson(Map<String, dynamic> json) {
     return Receipt(
-      body: json['body'] as String,
+      retailer: json['retailer'] as String,
       created: DateTime.parse(json['created'] as String),
+      items: json['items'] as Map<String, dynamic>,
     );
   }
 
   Map<String, dynamic> toJson() {
     return {
-      'body': body,
+      'retailer': retailer,
       'created': created.toIso8601String(),
+      'items': items,
     };
   }
 }
