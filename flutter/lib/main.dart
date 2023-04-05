@@ -27,8 +27,7 @@ class _MyAppState extends State<MyApp> {
     return MaterialApp(
       initialRoute: '/receipts',
       routes: {
-        '/receipts': (context) => ReceiptListScreen(
-            ModalRoute.of(context)!.settings.arguments as Receipt),
+        '/receipts': (context) => ReceiptListScreen(),
         '/receipt': (context) => ReceiptDetailsScreen(
             ModalRoute.of(context)!.settings.arguments as Receipt),
       },
@@ -37,9 +36,7 @@ class _MyAppState extends State<MyApp> {
 }
 
 class ReceiptListScreen extends StatefulWidget {
-  final Receipt receipt;
-
-  ReceiptListScreen(this.receipt);
+  ReceiptListScreen();
 
   @override
   _ReceiptListScreenState createState() => _ReceiptListScreenState();
@@ -57,7 +54,7 @@ class _ReceiptListScreenState extends State<ReceiptListScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text(widget.receipt.retailer)),
+      appBar: AppBar(title: Text('testTitle')),
       body: FutureBuilder<List<Receipt>>(
         future: _futureReceipts,
         builder: (BuildContext context, AsyncSnapshot<List<Receipt>> snapshot) {
