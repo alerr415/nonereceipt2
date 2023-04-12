@@ -44,12 +44,9 @@ class ReceiptListScreen extends StatefulWidget {
 }
 
 class _ReceiptListScreenState extends State<ReceiptListScreen> {
-  late Future<List<Receipt>> _futureReceipts;
-
   @override
   void initState() {
     super.initState();
-    _futureReceipts = HttpClient.fetchReceipts();
   }
 
   @override
@@ -57,7 +54,7 @@ class _ReceiptListScreenState extends State<ReceiptListScreen> {
     return Scaffold(
       appBar: AppBar(title: const Text('testTitle')),
       body: FutureBuilder<List<Receipt>>(
-        future: _futureReceipts,
+        future: HttpClient.fetchReceipts(),
         builder: (BuildContext context, AsyncSnapshot<List<Receipt>> snapshot) {
           if (snapshot.connectionState == ConnectionState.waiting) {
             return const CircularProgressIndicator();
@@ -68,10 +65,12 @@ class _ReceiptListScreenState extends State<ReceiptListScreen> {
               itemBuilder: (context, index) {
                 return GestureDetector(
                   onTap: () {
-                    Navigator.pushNamed(
+                    Navigator.push(
                       context,
-                      '/receipts',
-                      arguments: receipts,
+                      MaterialPageRoute(
+                        builder: (context) =>
+                            ReceiptDetailsScreen(receipts[index]),
+                      ),
                     );
                   },
                   child: ListTile(

@@ -15,8 +15,8 @@ class HttpClient {
     var url = Uri.parse("http://127.0.0.1:8000/receipts/");
     var result = await http.get(url);
     if (result.statusCode == 200) {
-      print(result.body);
-      return List<Receipt>.from(json.decode(result.body).map((receipt) => Receipt.fromJson(receipt)));
+      return List<Receipt>.from(
+          json.decode(result.body).map((receipt) => Receipt.fromJson(receipt)));
     } else {
       throw Exception("Something went wrong: ${result.statusCode}");
     }
