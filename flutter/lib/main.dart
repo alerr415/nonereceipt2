@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
 import 'api/http_api.dart';
 import 'models/receipt.dart';
-import 'models/retailer.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   runApp(MyApp());
 }
 
+// ignore: must_be_immutable
 class MyApp extends StatefulWidget {
   @override
   _MyAppState createState() => _MyAppState();
@@ -27,7 +27,7 @@ class _MyAppState extends State<MyApp> {
     return MaterialApp(
       initialRoute: '/receipts',
       routes: {
-        '/receipts': (context) => ReceiptListScreen(),
+        '/receipts': (context) => const ReceiptListScreen(),
         '/receipt': (context) => ReceiptDetailsScreen(
             ModalRoute.of(context)!.settings.arguments as Receipt),
       },
@@ -35,8 +35,9 @@ class _MyAppState extends State<MyApp> {
   }
 }
 
+//ignore: prefer_const_constructors
 class ReceiptListScreen extends StatefulWidget {
-  ReceiptListScreen();
+  const ReceiptListScreen();
 
   @override
   _ReceiptListScreenState createState() => _ReceiptListScreenState();
@@ -54,7 +55,7 @@ class _ReceiptListScreenState extends State<ReceiptListScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text('testTitle')),
+      appBar: AppBar(title: const Text('testTitle')),
       body: FutureBuilder<List<Receipt>>(
         future: _futureReceipts,
         builder: (BuildContext context, AsyncSnapshot<List<Receipt>> snapshot) {
@@ -79,18 +80,20 @@ class _ReceiptListScreenState extends State<ReceiptListScreen> {
                 );
               },
             );
-          } else
+          } else {
             return const Text("No data.");
+          }
         },
       ),
     );
   }
 }
 
+// ignore: use key in widget constructors
 class ReceiptDetailsScreen extends StatelessWidget {
   final Receipt receipt;
 
-  ReceiptDetailsScreen(this.receipt);
+  const ReceiptDetailsScreen(this.receipt);
 
   @override
   Widget build(BuildContext context) {
@@ -99,7 +102,7 @@ class ReceiptDetailsScreen extends StatelessWidget {
         title: Text(receipt.retailer),
       ),
       body: Padding(
-        padding: EdgeInsets.all(16.0),
+        padding: const EdgeInsets.all(16.0),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [

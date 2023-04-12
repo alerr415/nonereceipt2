@@ -1,7 +1,6 @@
 import 'package:http/http.dart' as http;
 import 'dart:convert';
 import 'package:nonereceipt/models/receipt.dart';
-import 'package:nonereceipt/models/retailer.dart';
 
 class HttpClient {
   static const username = "";
