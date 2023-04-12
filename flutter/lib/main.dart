@@ -88,7 +88,6 @@ class _ReceiptListScreenState extends State<ReceiptListScreen> {
   }
 }
 
-// ignore: use key in widget constructors
 class ReceiptDetailsScreen extends StatelessWidget {
   final Receipt receipt;
 
@@ -125,9 +124,24 @@ class ReceiptDetailsScreen extends StatelessWidget {
               children: receipt.items.map((item) {
                 return Padding(
                   padding: const EdgeInsets.only(bottom: 8.0),
-                  child: Text(
-                    "- ${item.name}: \$${item.price}",
-                    style: const TextStyle(fontSize: 16),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(
+                        "- ${item.name}",
+                        style: const TextStyle(fontSize: 16),
+                      ),
+                      Text(
+                        "  Quantity: ${item.quantity}",
+                        style:
+                            const TextStyle(fontSize: 14, color: Colors.grey),
+                      ),
+                      Text(
+                        "  Price: \$${item.price}",
+                        style:
+                            const TextStyle(fontSize: 14, color: Colors.grey),
+                      ),
+                    ],
                   ),
                 );
               }).toList(),
