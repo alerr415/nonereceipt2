@@ -24,4 +24,9 @@ class Item {
       'price': price,
     };
   }
+
+  @override
+  String toString() {
+    return 'Item{name: $name, quantity: $quantity, price: $price}';
+  }
 }
