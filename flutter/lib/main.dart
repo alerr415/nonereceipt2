@@ -105,9 +105,33 @@ class ReceiptDetailsScreen extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Text("Retailer: ${receipt.retailer}"),
-            Text("Created: ${receipt.created}"),
-            Text("Items: ${receipt.items}"),
+            Text(
+              "Retailer: ${receipt.retailer}",
+              style: const TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
+            ),
+            const SizedBox(height: 16),
+            Text(
+              "Created: ${receipt.created}",
+              style: const TextStyle(fontSize: 18),
+            ),
+            const SizedBox(height: 16),
+            const Text(
+              "Items:",
+              style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+            ),
+            const SizedBox(height: 8),
+            Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: receipt.items.map((item) {
+                return Padding(
+                  padding: const EdgeInsets.only(bottom: 8.0),
+                  child: Text(
+                    "- ${item.name}: \$${item.price}",
+                    style: const TextStyle(fontSize: 16),
+                  ),
+                );
+              }).toList(),
+            ),
           ],
         ),
       ),
