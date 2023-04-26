@@ -36,10 +36,10 @@ def getReceiptsByRetailer(request, pk):
 #     return Response('Receipt was deleted')
 
 
-# # Get all retailers
-# @api_view(['GET'])
-# def getRetailers(request):
-#     retailers = Retailer.objects.all()
-#     serializer = RetailerSerializer(retailers, many=True)
-#     return Response(serializer.data)
+# Get all retailers
+@api_view(['GET'])
+def getRetailers(request):
+    retailers = Retailer.objects.all()
+    serializer = RetailerSerializer(retailers, many=True)
+    return Response(serializer.data)
 
