@@ -2,6 +2,8 @@ import 'package:http/http.dart' as http;
 import 'dart:convert';
 import 'package:nonereceipt/models/receipt.dart';
 
+import '../models/retailer.dart';
+
 class HttpClient {
   static const username = "";
   static const password = "";
@@ -30,6 +32,17 @@ class HttpClient {
       return jsonList.map((json) => Receipt.fromJson(json)).toList();
     } else {
       throw Exception("failed to fetch recipes from retailer: $retailerName");
+    }
+  }
+
+  static Future<List<Retailer>> fetchRetailers() async {
+    var url = Uri.parse("${getUrl()}/retailers");
+    var result = await http.get(url);
+    if (result.statusCode == 200) {
+      var jsonList = json.decode(result.body) as List;
+      return jsonList.map((json) => Retailer.fromJson(json)).toList();
+    } else {
+      throw Exception("failed to fetch retailers");
     }
   }
 }
