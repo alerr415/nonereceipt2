@@ -7,12 +7,11 @@ class HttpClient {
   static const password = "";
 
   static String getUrl() {
-    return "";
+    return "http://127.0.0.1:8000";
   }
 
-  // Fetch receipts from the API
   static Future<List<Receipt>> fetchReceipts() async {
-    var url = Uri.parse("http://127.0.0.1:8000/receipts/");
+    var url = Uri.parse("${getUrl()}/receipts");
     var result = await http.get(url);
     if (result.statusCode == 200) {
       return List<Receipt>.from(
@@ -24,8 +23,7 @@ class HttpClient {
 
   static Future<List<Receipt>> fetchReceiptsByRetailer(
       String retailerName) async {
-    var url =
-        Uri.parse("http://127.0.0.1:8000/retailers/$retailerName/receipts");
+    var url = Uri.parse("${getUrl()}/retailers/$retailerName/receipts");
     var result = await http.get(url);
     if (result.statusCode == 200) {
       var jsonList = json.decode(result.body) as List;

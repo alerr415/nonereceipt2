@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:nonereceipt/controller/receipt_controller.dart';
 import 'package:nonereceipt/receipt/receipt_details.dart';
 import '../models/receipt.dart';
-import '../api/http_api.dart';
 
 class ReceiptListScreen extends StatefulWidget {
   const ReceiptListScreen();
@@ -21,7 +21,7 @@ class _ReceiptListScreenState extends State<ReceiptListScreen> {
     return Scaffold(
       appBar: AppBar(title: const Text('testTitle')),
       body: FutureBuilder<List<Receipt>>(
-        future: HttpClient.fetchReceipts(),
+        future: ReceiptController.getReceipts(),
         builder: (BuildContext context, AsyncSnapshot<List<Receipt>> snapshot) {
           if (snapshot.connectionState == ConnectionState.waiting) {
             return const CircularProgressIndicator();
