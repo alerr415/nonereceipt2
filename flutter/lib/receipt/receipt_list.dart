@@ -26,7 +26,6 @@ class _ReceiptListScreenState extends State<ReceiptListScreen> {
     });
   }
 
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
