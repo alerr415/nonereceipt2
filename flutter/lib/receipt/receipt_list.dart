@@ -33,19 +33,10 @@ class _ReceiptListScreenState extends State<ReceiptListScreen> {
       body: Column(
         children: [
           DropdownSearch<Retailer>(
-            items: retailers ?? [],
+            popupProps: const PopupProps.bottomSheet(),
+            asyncItems: (String filter) => RetailerController.getRetailers(),
             itemAsString: (Retailer retailer) => retailer.name,
-            onChanged: (value) {
-              setState(() {
-                _filterRetailerName = value?.name;
-              });
-            },
-            selectedItem: _filterRetailerName == null
-                ? null
-                : _filterRetailerName == ""
-                    ? null
-                    : retailers?.firstWhere(
-                        (element) => element.name == _filterRetailerName),
+            onChanged: (Retailer? data) => print(data),
           ),
           FutureBuilder<List<Receipt>>(
             future: _filterRetailerName != null
