@@ -37,7 +37,9 @@ class HttpClient {
 
   static Future<List<Retailer>> fetchRetailers() async {
     var url = Uri.parse("${getUrl()}/retailers");
+    print(url);
     var result = await http.get(url);
+    print("Valami történt");
     if (result.statusCode == 200) {
       var jsonList = json.decode(result.body) as List;
       return jsonList.map((json) => Retailer.fromJson(json)).toList();

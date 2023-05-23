@@ -1,9 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:nonereceipt/controller/receipt_controller.dart';
 import 'package:nonereceipt/controller/retailer_controller.dart';
-import 'package:nonereceipt/receipt/receipt_details.dart';
-import 'package:dropdown_search/dropdown_search.dart';
-import '../models/receipt.dart';
+
 import '../models/retailer.dart';
 
 class ReceiptListScreen extends StatefulWidget {
@@ -14,7 +11,6 @@ class ReceiptListScreen extends StatefulWidget {
 }
 
 class _ReceiptListScreenState extends State<ReceiptListScreen> {
-  String? _filterRetailerName;
   List<Retailer>? retailers;
   @override
   void initState() {
@@ -24,56 +20,33 @@ class _ReceiptListScreenState extends State<ReceiptListScreen> {
         retailers = value;
       });
     });
+    //
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: const Text('testTitle')),
-      body: Column(
-        children: [
-          DropdownSearch<Retailer>(
-            popupProps: const PopupProps.bottomSheet(),
-            asyncItems: (String filter) => RetailerController.getRetailers(),
-            itemAsString: (Retailer retailer) => retailer.name,
-            onChanged: (Retailer? data) => print(data),
-          ),
-          FutureBuilder<List<Receipt>>(
-            future: _filterRetailerName != null
-                ? ReceiptController.getReceiptsByRetailerName(
-                    _filterRetailerName!)
-                : ReceiptController.getReceipts(),
-            builder:
-                (BuildContext context, AsyncSnapshot<List<Receipt>> snapshot) {
-              if (snapshot.connectionState == ConnectionState.waiting) {
-                return const CircularProgressIndicator();
-              } else if (snapshot.hasData) {
-                List<Receipt> receipts = snapshot.data!;
-                return ListView.builder(
-                  itemCount: receipts.length,
-                  itemBuilder: (context, index) {
-                    return GestureDetector(
-                      onTap: () {
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                            builder: (context) =>
-                                ReceiptDetailsScreen(receipts[index]),
-                          ),
-                        );
-                      },
-                      child: ListTile(
-                        title: Text("Receipt ${receipts[index].created}"),
-                      ),
-                    );
-                  },
-                );
-              } else {
-                return const Text("No data.");
-              }
-            },
-          ),
-        ],
+      appBar: AppBar(
+        title: const Text('Retailers'),
+      ),
+      body: Center(
+        child: DropdownButton<Retailer>(
+          hint: const Text('Select a retailer'),
+          onChanged: (Retailer? newValue) {
+            setState(() {
+              _filterRetailerName = newValue?.name;
+              print(newValue?.name);
+            });
+            // Perform any additional filtering or actions based on the selected retailer
+          },
+          items: retailers?.map((Retailer retailer) {
+            return DropdownMenuItem<Retailer>(
+              value: retailer,
+              child: Text(retailer.name),
+            );
+          }).toList() ??
+              [],
+        ),
       ),
     );
   }
