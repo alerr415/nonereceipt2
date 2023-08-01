@@ -30,12 +30,11 @@ class _ReceiptListScreenState extends State<ReceiptListScreen> {
   Future<void> _fetchReceiptsByRetailer(String retailerName) async {
     try {
       List<Receipt> retrievedReceipts =
-      await ReceiptController.getReceiptsByRetailerName(retailerName);
+          await ReceiptController.getReceiptsByRetailerName(retailerName);
       setState(() {
         receipts = retrievedReceipts;
       });
     } catch (e) {
-      // Handle any error that occurs while fetching receipts
       print('Error fetching receipts: $e');
     }
   }
@@ -64,26 +63,26 @@ class _ReceiptListScreenState extends State<ReceiptListScreen> {
                 }
               },
               items: retailers?.map((Retailer retailer) {
-                return DropdownMenuItem<Retailer>(
-                  value: retailer,
-                  child: Text(retailer.name),
-                );
-              }).toList() ??
+                    return DropdownMenuItem<Retailer>(
+                      value: retailer,
+                      child: Text(retailer.name),
+                    );
+                  }).toList() ??
                   [],
             ),
             Expanded(
               child: receipts != null
                   ? ListView.builder(
-                itemCount: receipts!.length,
-                itemBuilder: (context, index) {
-                  Receipt receipt = receipts![index];
-                  // Build your receipt list item widget here
-                  return ListTile(
-                    title: Text(receipt.created.toString()),
-                    // Add more details if needed
-                  );
-                },
-              )
+                      itemCount: receipts!.length,
+                      itemBuilder: (context, index) {
+                        Receipt receipt = receipts![index];
+                        // Build your receipt list item widget here
+                        return ListTile(
+                          title: Text(receipt.created.toString()),
+                          // Add more details if needed
+                        );
+                      },
+                    )
                   : Container(), // Placeholder widget if receipts list is null
             ),
           ],
